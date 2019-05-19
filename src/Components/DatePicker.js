@@ -131,7 +131,10 @@ class DP extends Component {
     this.setState(state => ({
       dates: moment.range(
         state.dates.start.add(1, "month").startOf("month"),
-        !state.dates.end.add(1, "month").isBefore(moment().startOf("month"))
+        !state.dates.end
+          .clone()
+          .add(1, "month")
+          .isBefore(moment().startOf("month"))
           ? moment().clone()
           : state.dates.end.add(1, "month").endOf("month")
       )
